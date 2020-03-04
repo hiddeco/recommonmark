@@ -170,6 +170,9 @@ class AutoStructify(transforms.Transform):
             if not isinstance(ref, nodes.reference):
                 return None
             title, uri, docpath = self.parse_ref(ref)
+            # parse_ref() produces an absolute path
+            # while we need a relative path here
+            docpath = ref['refuri']
             if title is None or uri.startswith('#'):
                 return None
             if docpath:
